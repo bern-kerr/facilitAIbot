@@ -15,7 +15,7 @@ from langchain.prompts import ChatPromptTemplate
 from loaders import * # chama as funções dentro do arquivo loaders.py
 
 TIPOS_ARQUIVOS_VALIDOS = [
-    'Usar o bot sem arquivos', 'Site', 'YouTube', 'pdf', 'csv', 'txt'
+    'Usar o bot sem arquivos ou links', 'Site', 'YouTube', 'pdf', 'csv', 'txt'
 ]
 
 CONFIG_MODELOS = {'OpenAI': 
