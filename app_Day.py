@@ -133,7 +133,7 @@ def sidebar():
         if tipo_arquivo == 'Usar o bot sem arquivos ou links':
             st.markdown(f'Clique em inicializar {nome_robo}')
         if tipo_arquivo == 'Site':
-            arquivo = st.text_input('Digite a url do site (com o http://)')
+            arquivo = st.text_input('Digite a url do site')
         if tipo_arquivo == 'YouTube':
             arquivo = st.text_input('Digite o código do vídeo - inicia e termina com letra ou número\n\n\nExemplo: G4VKiq9NEvM em youtube.com/watch?v=G4VKiq9NEvM')
         if tipo_arquivo == 'pdf':

@@ -1,5 +1,6 @@
 import os # para a gestão de variável do useragent no Windows
 from time import sleep
+import re
 import streamlit as st
 from langchain_community.document_loaders import (WebBaseLoader,
                                                   YoutubeLoader, 
@@ -28,11 +29,18 @@ def carrega_site(url):
         st.stop()
     return documento
 
-def carrega_youtube(video_id): # faz as transcrições dos CC's do video
-    loader = YoutubeLoader(video_id, add_video_info=False, language=['pt'])
-    lista_documentos = loader.load()
-    documento = '\n\n'.join([doc.page_content for doc in lista_documentos])
-    return documento
+def carrega_youtube(url):
+    pattern = r"v=([-\w]+)"
+    match = re.search(pattern, url)
+
+    if match:
+        video_id = match.group(1)
+        loader = YoutubeLoader(video_id, add_video_info=False, language=['pt'])
+        lista_documentos = loader.load()
+        documento = '\n\n'.join([doc.page_content for doc in lista_documentos])
+        return documento
+    else:
+        return "URL inválido. Não foi possível encontrar o ID do vídeo."
 
 def carrega_csv(caminho):
     loader = CSVLoader(caminho)
