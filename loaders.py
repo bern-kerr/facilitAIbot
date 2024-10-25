@@ -36,13 +36,13 @@ def carrega_youtube(arquivo):
     padrao_id = r"^[-\w]{11}$"  # Padrão para ID puro (11 caracteres)
     
     # Se a entrada for uma URL, remover parâmetros após '?'
-    if '/' in entrada:
-        entrada = entrada.split('?')[0]
+    if '/' in arquivo:
+        arquivo = arquivo.split('?')[0]
     
     # Tentar encontrar match em todos os padrões
-    match_completo = re.search(padrao_completo, entrada)
-    match_curto = re.search(padrao_curto, entrada)
-    match_id = re.search(padrao_id, entrada)
+    match_completo = re.search(padrao_completo, arquivo)
+    match_curto = re.search(padrao_curto, arquivo)
+    match_id = re.search(padrao_id, arquivo)
     
     # Pegar o ID do vídeo do padrão que der match
     if match_completo:
@@ -50,7 +50,7 @@ def carrega_youtube(arquivo):
     elif match_curto:
         video_id = match_curto.group(1)
     elif match_id:
-        video_id = entrada
+        video_id = arquivo
     else:
         return "Entrada inválida. Por favor, forneça um ID de vídeo válido ou URL do YouTube."
     
