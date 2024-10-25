@@ -29,7 +29,7 @@ def carrega_site(url):
         st.stop()
     return documento
 
-def carrega_youtube(entrada):
+def carrega_youtube(arquivo):
     # Padrões para diferentes formatos de entrada
     padrao_completo = r"v=([-\w]+)"
     padrao_curto = r"youtu\.be\/([-\w]+)"
