@@ -131,7 +131,7 @@ def sidebar():
     with tabs[0]:
         tipo_arquivo = st.selectbox('Selecione como você quer usar o bot', TIPOS_ARQUIVOS_VALIDOS)
         if tipo_arquivo == 'Usar o bot sem arquivos ou links':
-            st.markdown(f'Clique em inicializar {nome_robo}')
+            arquivo = st.markdown(f'Clique em inicializar {nome_robo}')
         if tipo_arquivo == 'Site':
             arquivo = st.text_input('Digite a url do site')
         if tipo_arquivo == 'YouTube':
