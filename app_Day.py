@@ -67,7 +67,12 @@ def carrega_modelo(provedor, modelo, api_key, tipo_arquivo, arquivo, nome_robo, 
     Sempre que houver $ na sua saída, substitua por S.
 
     Se a informação do documento for algo como "Just a moment...Enable JavaScript and cookies to continue" 
-    sugira ao usuário carregar novamente o assistente!'''.format(nome_robo, genero, nome_humano, tipo_arquivo, documento)
+    sugira ao usuário carregar novamente o assistente!
+    
+    Se você receber alguma mensagem falando que não foi possível carregar o vídeo, dizer logo no início da conversa 
+    que não foi capaz de carregar o vídeo e sugerir que o usuário tente novamente depois, ou tente carregar outro vídeo
+
+    '''.format(nome_robo, genero, nome_humano, tipo_arquivo, documento)
 
     print(system_message)
 
@@ -113,11 +118,11 @@ def pagina_chat():
 
     input_usuario = st.chat_input(f'Fale com o {nome_robo}')
     if input_usuario:
-        chat = st.chat_message('human') # mostra caixa de mensagem no streamlit para receber o que o usuário digitou
-        chat.markdown(input_usuario) # exibe conteudo do input do usuário
+        chat = st.chat_message('human')
+        chat.markdown(input_usuario) 
 
-        chat = st.chat_message('ai') # mesmo, para a IA
-        resposta = chat.write_stream(chain.stream({ # nova funcionalidade streamlit "write_stream", escreve com o .stream com os tokens do modelo
+        chat = st.chat_message('ai')
+        resposta = chat.write_stream(chain.stream({ 
             'input': input_usuario, 
             'chat_history': memoria.buffer_as_messages
             }))

@@ -29,18 +29,39 @@ def carrega_site(url):
         st.stop()
     return documento
 
-def carrega_youtube(url):
-    pattern = r"v=([-\w]+)"
-    match = re.search(pattern, url)
-
-    if match:
-        video_id = match.group(1)
+def carrega_youtube(entrada):
+    # Padrões para diferentes formatos de entrada
+    padrao_completo = r"v=([-\w]+)"
+    padrao_curto = r"youtu\.be\/([-\w]+)"
+    padrao_id = r"^[-\w]{11}$"  # Padrão para ID puro (11 caracteres)
+    
+    # Se a entrada for uma URL, remover parâmetros após '?'
+    if '/' in entrada:
+        entrada = entrada.split('?')[0]
+    
+    # Tentar encontrar match em todos os padrões
+    match_completo = re.search(padrao_completo, entrada)
+    match_curto = re.search(padrao_curto, entrada)
+    match_id = re.search(padrao_id, entrada)
+    
+    # Pegar o ID do vídeo do padrão que der match
+    if match_completo:
+        video_id = match_completo.group(1)
+    elif match_curto:
+        video_id = match_curto.group(1)
+    elif match_id:
+        video_id = entrada
+    else:
+        return "Entrada inválida. Por favor, forneça um ID de vídeo válido ou URL do YouTube."
+    
+    try:
+        # Carregar o vídeo usando o ID encontrado
         loader = YoutubeLoader(video_id, add_video_info=False, language=['pt'])
         lista_documentos = loader.load()
         documento = '\n\n'.join([doc.page_content for doc in lista_documentos])
         return documento
-    else:
-        return "URL inválido. Não foi possível encontrar o ID do vídeo."
+    except Exception as e:
+        return f"Erro ao carregar o vídeo: {str(e)}"
 
 def carrega_csv(caminho):
     loader = CSVLoader(caminho)
