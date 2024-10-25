@@ -10,6 +10,9 @@ from fake_useragent import UserAgent # para driblar bloqueios DDOS
 
 def carrega_site(url):
     documento = ''
+    if not url.startswith(('http://', 'https://')):
+        url = 'http://' + url.lstrip('/')  # Remove leading slashes if any
+    
     for i in range(5): # 5 tentativas de carregar site
         try:
             os.environ['USER_AGENT'] = UserAgent().random # para driblar bloqueios DDOS

@@ -130,10 +130,10 @@ def sidebar():
     tabs = st.tabs(['Upload de Arquivos', 'Seleção de Modelos'])
     with tabs[0]:
         tipo_arquivo = st.selectbox('Selecione como você quer usar o bot', TIPOS_ARQUIVOS_VALIDOS)
-        if tipo_arquivo == 'Usar o bot sem arquivos':
-            arquivo = st.markdown(f'Clique em inicializar {nome_robo}')
+        if tipo_arquivo == 'Usar o bot sem arquivos ou links':
+            st.markdown(f'Clique em inicializar {nome_robo}')
         if tipo_arquivo == 'Site':
-            arquivo = st.text_input('Digite a url do site')
+            arquivo = st.text_input('Digite a url do site (com o http://)')
         if tipo_arquivo == 'YouTube':
             arquivo = st.text_input('Digite o código do vídeo - inicia e termina com letra ou número\n\n\nExemplo: G4VKiq9NEvM em youtube.com/watch?v=G4VKiq9NEvM')
         if tipo_arquivo == 'pdf':
@@ -152,7 +152,7 @@ def sidebar():
     
     if st.button(f'Inicializar {nome_robo}', use_container_width=True):
         
-        if tipo_arquivo == 'Usar o bot sem arquivos':
+        if tipo_arquivo == 'Usar o bot sem arquivos ou links':
             carrega_chat(provedor, modelo, api_key,nome_robo)
         else:
             carrega_modelo(provedor, modelo, api_key, tipo_arquivo, arquivo, nome_robo, genero, nome_humano)
