@@ -69,9 +69,6 @@ def carrega_modelo(provedor, modelo, api_key, tipo_arquivo, arquivo, nome_robo, 
     Se a informação do documento for algo como "Just a moment...Enable JavaScript and cookies to continue" 
     sugira ao usuário carregar novamente o assistente!
     
-    Se você receber alguma mensagem falando que não foi possível carregar o vídeo, dizer logo no início da conversa 
-    que não foi capaz de carregar o vídeo e sugerir que o usuário tente novamente depois, ou tente carregar outro vídeo
-
     '''.format(nome_robo, genero, nome_humano, tipo_arquivo, documento)
 
     print(system_message)
@@ -140,7 +137,7 @@ def sidebar():
         if tipo_arquivo == 'Site':
             arquivo = st.text_input('Digite a url do site')
         if tipo_arquivo == 'YouTube':
-            arquivo = st.text_input('Cole o link do video ou vídeo ID')
+            arquivo = st.text_input('Cole o link do video, tirado do botão compartilhar no app ou site do youtube - só funciona em vídeos com CCs')
         if tipo_arquivo == 'pdf':
             arquivo = st.file_uploader('Faça o upload do arquivo pdf', type=['.pdf'])
         if tipo_arquivo == 'csv':

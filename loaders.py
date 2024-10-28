@@ -56,7 +56,7 @@ def carrega_youtube(arquivo):
     
     try:
         # Carregar o vídeo usando o ID encontrado
-        loader = YoutubeLoader(video_id, add_video_info=False, language=['pt'])
+        loader = YoutubeLoader(video_id, add_video_info=False, language=['pt','en','es'])
         lista_documentos = loader.load()
         documento = '\n\n'.join([doc.page_content for doc in lista_documentos])
         return documento
