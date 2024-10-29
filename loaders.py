@@ -6,7 +6,8 @@ from langchain_community.document_loaders import (WebBaseLoader,
                                                   YoutubeLoader, 
                                                   CSVLoader, 
                                                   PyPDFLoader, 
-                                                  TextLoader)
+                                                  TextLoader,
+                                                  UnstructuredExcelLoader)
 from fake_useragent import UserAgent # para driblar bloqueios DDOS
 
 def carrega_site(url):
@@ -62,6 +63,12 @@ def carrega_youtube(arquivo):
         return documento
     except Exception as e:
         return f"Erro ao carregar o vídeo: {str(e)}"
+
+def carrega_excel(caminho):
+    loader = UnstructuredExcelLoader(caminho, mode="elements")
+    lista_documentos = loader.load()
+    documento = '\n\n'.join([doc.page_content for doc in lista_documentos])
+    return documento
 
 def carrega_csv(caminho):
     loader = CSVLoader(caminho)

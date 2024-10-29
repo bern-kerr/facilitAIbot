@@ -15,7 +15,7 @@ from langchain.prompts import ChatPromptTemplate
 from loaders import * # chama as funções dentro do arquivo loaders.py
 
 TIPOS_ARQUIVOS_VALIDOS = [
-    'Usar o bot sem arquivos ou links', 'Site', 'YouTube', 'pdf', 'csv', 'txt'
+    'Usar o bot sem arquivos ou links', 'Site', 'YouTube', 'pdf', 'Excel', 'csv', 'txt'
 ]
 
 CONFIG_MODELOS = {'OpenAI': 
@@ -39,6 +39,11 @@ def carrega_arquivos(tipo_arquivo, arquivo):
             temp.write(arquivo.read())
             nome_temp = temp.name
         documento = carrega_pdf(nome_temp)
+    if tipo_arquivo == 'Excel':
+        with tempfile.NamedTemporaryFile(suffix='.xlsx', delete=False) as temp:
+            temp.write(arquivo.read())
+            nome_temp = temp.name
+        documento = carrega_excel(nome_temp)
     if tipo_arquivo == 'csv':
         with tempfile.NamedTemporaryFile(suffix='.csv', delete=False) as temp:
             temp.write(arquivo.read())
@@ -140,6 +145,8 @@ def sidebar():
             arquivo = st.text_input('Cole o link do video, tirado do botão compartilhar no app ou site do youtube - só funciona em vídeos com CCs')
         if tipo_arquivo == 'pdf':
             arquivo = st.file_uploader('Faça o upload do arquivo pdf', type=['.pdf'])
+        if tipo_arquivo == 'Excel':
+            arquivo = st.file_uploader('Faça o upload do arquivo xlsx', type=['.xlsx'])
         if tipo_arquivo == 'csv':
             arquivo = st.file_uploader('Faça o upload do arquivo csv', type=['.csv'])
         if tipo_arquivo == 'txt':
