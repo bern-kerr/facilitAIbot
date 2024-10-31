@@ -1,7 +1,7 @@
 nome_robo = 'CR-7'
 nome_humano = 'Breno'
 genero = 'homem'
-link_imagem='https://i.pinimg.com/564x/ca/ff/94/caff942a376ad0466f5c97ba31b82439.jpg'
+link_imagem='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcST2ceVyrW8ieddtFifokPpt18bkFbhfgnRpQ&s'
 #https://i.ytimg.com/vi/rzisDFdLJzw/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDEMQeT0OJsb3mHaVD2J6XSOUUw9Q
 
 import tempfile
